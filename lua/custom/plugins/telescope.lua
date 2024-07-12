@@ -10,7 +10,6 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
-    'nvim-telescope/telescope-frecency.nvim',
     'nvim-tree/nvim-web-devicons',
   },
   config = function()
@@ -39,6 +38,5 @@ return {
     }
 
     pcall(require('telescope').load_extension, 'fzf')
-    require('telescope').load_extension 'frecency'
   end,
 }

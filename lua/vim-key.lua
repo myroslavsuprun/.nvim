@@ -18,10 +18,10 @@ vim.keymap.set('n', 's', '"_s', { noremap = true, silent = true })
 vim.keymap.set('n', 'S', '"_S', { noremap = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Moving lines of code up and down
 vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { silent = true })
@@ -111,6 +111,9 @@ end, { desc = 'Harpoon file 3' })
 vim.keymap.set('n', '<M-4>', function()
   harpoon:list():select(4)
 end, { desc = 'Harpoon file 4' })
+vim.keymap.set('n', '<M-5>', function()
+  harpoon:list():select(5)
+end, { desc = 'Harpoon file 5' })
 vim.keymap.set('n', '<M-e>', function()
   -- toggle_telescope(harpoon:list())
   harpoon.ui:toggle_quick_menu(harpoon:list())
