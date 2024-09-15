@@ -40,3 +40,6 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 vim.opt.scrolloff = 10
+
+-- Visual line for max line length restriction
+vim.opt.colorcolumn = '80'

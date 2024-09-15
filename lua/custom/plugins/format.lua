@@ -36,6 +36,8 @@ return { --Autoformat
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'eslint_d' },
         typescript = { 'prettierd', 'eslint_d' },
+        -- Update also on mason nvim servers
+        c = { 'clang-format' },
       },
     }
 

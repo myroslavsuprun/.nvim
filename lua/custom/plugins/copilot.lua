@@ -5,12 +5,12 @@ return {
   config = function()
     require('copilot').setup {
       -- Due to cmp usage.
-      suggestion = { enabled = false },
-      panel = { enabled = false },
+      -- suggestion = { enabled = false },
+      -- panel = { enabled = false },
 
-      -- suggestion = {
-      --   auto_trigger = true,
-      -- },
+      suggestion = {
+        auto_trigger = true,
+      },
     }
   end,
 }

@@ -24,6 +24,9 @@ vim.keymap.set('v', 'm', ':set hlsearch!<CR>', { silent = true })
 -- ?????
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>de', function()
+  vim.diagnostic.open_float(nil, { focusable = false })
+end, { desc = 'Show [D]iagnostics [E]rror' })
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })

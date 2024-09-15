@@ -23,8 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 
 require('lazy').setup({
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
+  require 'custom.plugins.vim-sleuth',
   require 'custom.plugins.which-key',
   require 'custom.plugins.telescope',
   require 'custom.plugins.harpoon',

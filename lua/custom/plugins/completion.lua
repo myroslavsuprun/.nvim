@@ -8,7 +8,7 @@ return { -- Autocompletion
     --  into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
-    'zbirenbaum/copilot-cmp',
+    -- 'zbirenbaum/copilot-cmp',
   },
   config = function()
     -- See `:help cmp`
@@ -48,9 +48,9 @@ return { -- Autocompletion
         ['<C-Space>'] = cmp.mapping.complete {},
       },
       sources = {
-        { name = 'copilot', priority = 1 },
-        { name = 'nvim_lsp', priority = 2 },
-        { name = 'path', priority = 2 },
+        -- { name = 'copilot', priority = 2 },
+        { name = 'nvim_lsp' },
+        { name = 'path' },
       },
     }
   end,
