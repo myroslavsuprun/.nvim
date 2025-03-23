@@ -31,7 +31,6 @@ require('lazy').setup({
   -- LSP Plugins
   require 'custom.plugins.lua-lsp',
   require 'custom.plugins.copilot',
-  require 'custom.plugins.copilot-cmp',
 
   require 'custom.plugins.lsp',
   require 'custom.plugins.lint',
@@ -52,6 +51,8 @@ require('lazy').setup({
     icons = {},
   },
 })
+
+vim.lsp.set_log_level 'off'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

@@ -133,10 +133,9 @@ return {
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      tsserver = {},
       prismals = {},
-      clangd = {},
       ['clang-format'] = {},
+      terraformls = {},
 
       lua_ls = {
         -- cmd = {...},

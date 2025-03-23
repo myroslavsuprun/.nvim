@@ -8,6 +8,8 @@ return {
     vim.g.everforest_sign_column_background = 'none' -- 'none', 'grey'
     vim.g.everforest_diagnostic_virtual_text = 'colored'
 
+    -- vim.o.background = 'light'
+
     vim.cmd.colorscheme 'everforest'
     vim.cmd.hi 'Comment gui=none'
   end,
