@@ -54,5 +54,12 @@ require('lazy').setup({
 
 vim.lsp.set_log_level 'off'
 
+vim.diagnostic.config {
+  virtual_lines = {
+    current_line = true,
+  },
+  virtual_text = false,
+}
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

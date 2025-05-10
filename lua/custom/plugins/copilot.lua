@@ -11,6 +11,13 @@ return {
       suggestion = {
         auto_trigger = true,
       },
+      filetypes = {
+        yaml = true,
+        markdown = true,
+        gitcommit = true,
+        gitrebase = true,
+        hgcommit = true,
+      },
     }
   end,
 }
