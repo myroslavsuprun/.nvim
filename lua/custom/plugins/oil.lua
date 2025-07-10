@@ -6,10 +6,6 @@ return {
 
     require('oil').setup {
       default_file_explorer = true,
-      keymaps = {
-        -- remove for saving
-        ['<C-s>'] = false,
-      },
       view_options = {
         show_hidden = true,
       },
