@@ -80,6 +80,8 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+vim.lsp.set_log_level 'off'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -490,7 +492,8 @@ require('lazy').setup({
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
-        virtual_text = {
+        virtual_lines = {
+          current_line = true,
           source = 'if_many',
           spacing = 2,
           format = function(diagnostic)
@@ -503,6 +506,7 @@ require('lazy').setup({
             return diagnostic_message[diagnostic.severity]
           end,
         },
+        virtual_text = false,
       }
 
       -- LSP servers and clients are able to communicate to each other what features they support.
