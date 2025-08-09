@@ -11,7 +11,7 @@ return {
     end
 
     require('ibl').setup {
-      indent = { highlight = hl_list, char = '▏' },
+      indent = { highlight = hl_list, char = '▏', tab_char = '▸' },
       whitespace = {
         highlight = hl_list,
         remove_blankline_trail = false,

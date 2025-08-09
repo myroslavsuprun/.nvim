@@ -141,6 +141,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.keymap.set('n', '<leader>tf', function()
+  if vim.b.disable_autoformat then
+    vim.b.disable_autoformat = false
+    print 'formatting enabled'
+  else
+    vim.b.disable_autoformat = true
+    print 'formatting disabled'
+  end
+end, { desc = '[T]oggle [F]ormatting with Conform' })
+
+vim.keymap.set('n', 'K', function()
+  vim.lsp.buf.hover {
+    max_width = 80,
+    max_height = 200,
+    border = 'solid',
+  }
+end, { desc = 'Hover docs' })
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -158,7 +176,14 @@ rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'NMAC427/guess-indent.nvim',
+    config = function()
+      require('guess-indent').setup {}
+
+      vim.keymap.set('n', '<leader>gi', '<cmd>:GuessIndent<CR>', { desc = '[G]uess [I]ndent' })
+    end,
+  }, -- Detect tabstop and shiftwidth automatically
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -269,6 +294,20 @@ require('lazy').setup({
             require('telescope.themes').get_dropdown(),
           },
         },
+
+        pickers = {
+          buffers = {
+            show_all_buffers = true,
+            sort_mru = true,
+            previewer = false,
+            mappings = {
+              i = {
+                ['<C-d>'] = 'delete_buffer',
+              },
+            },
+            theme = 'dropdown',
+          },
+        },
       }
 
       -- Enable Telescope extensions if they are installed
@@ -312,6 +351,8 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+
+  { 'mfussenegger/nvim-jdtls', ft = 'java' },
 
   -- LSP Plugins
   {
@@ -388,7 +429,7 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -422,35 +463,6 @@ require('lazy').setup({
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
-
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-              callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-              end,
-            })
-          end
 
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
@@ -519,6 +531,7 @@ require('lazy').setup({
         terraformls = {},
         tflint = {},
         ts_ls = {},
+        jdtls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
         lua_ls = {
@@ -561,6 +574,10 @@ require('lazy').setup({
         automatic_installation = false,
         handlers = {
           function(server_name)
+            if server_name == 'jdtls' then
+              return
+            end
+
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
@@ -594,7 +611,7 @@ require('lazy').setup({
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
+        if disable_filetypes[vim.bo[bufnr].filetype] or vim.b.disable_autoformat then
           return nil
         else
           return {
@@ -616,6 +633,10 @@ require('lazy').setup({
         yaml = { 'prettierd' },
         html = { 'prettierd' },
         c = { 'clang-format' },
+        templ = {
+          'templ',
+          'injected',
+        },
       },
     },
   },
@@ -799,6 +820,7 @@ require('lazy').setup({
         'make',
         'cpp',
         'terraform',
+        'java',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
