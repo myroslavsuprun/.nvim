@@ -1,36 +1,9 @@
--- local config = {
---   cmd = { vim.fn.expand '~/.local/share/nvim/mason/bin/jdtls' },
---   root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
---   settings = {
---     java = {
---       home = '/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home',
---
---       runtimes = {
---         {
---           name = 'JavaSE-17',
---           path = '/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home/',
---         },
---       },
---     },
---
---     maven = {
---       downloadSources = true,
---     },
---     eclipse = {
---       downloadSources = true,
---     },
---   },
--- }
--- require('jdtls').start_or_attach(config)
-
 -- JDTLS (Java LSP) configuration
 local home = vim.env.HOME -- Get the home directory
 
 local jdtls = require 'jdtls'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = home .. '/jdtls-workspace/' .. project_name
-
-local system_os = 'mac'
 
 -- Needed for debugging
 local bundles = {
@@ -63,7 +36,7 @@ local config = {
     '-jar',
     home .. '/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar',
     '-configuration',
-    home .. '/.local/share/nvim/mason/packages/jdtls/config_' .. system_os,
+    home .. '/.local/share/nvim/mason/packages/jdtls/config_mac',
     '-data',
     workspace_dir,
   },
@@ -85,6 +58,10 @@ local config = {
           {
             name = 'JavaSE-17',
             path = '/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/Contents/Home',
+          },
+          {
+            name = 'JavaSE-21',
+            path = '/opt/homebrew/Cellar/openjdk@21/21.0.8/libexec/openjdk.jdk/Contents/Home',
           },
         },
       },
