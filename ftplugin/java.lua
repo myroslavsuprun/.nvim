@@ -10,8 +10,7 @@ local bundles = {
   vim.fn.glob(home .. '/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'),
 }
 
--- Needed for running/debugging unit tests
-vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/.local/share/nvim/mason/share/java-test/*.jar', 1), '\n'))
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/.local/share/nvim/mason/share/java-test/*.jar', true), '\n'))
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
@@ -41,19 +40,14 @@ local config = {
     workspace_dir,
   },
 
-  -- This is the default if not provided, you can remove it. Or adjust as needed.
-  -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'pom.xml', 'build.gradle' },
+  root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'pom.xml', 'build.gradle', 'gradlew' },
 
-  -- Here you can configure eclipse.jdt.ls specific settings
-  -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   settings = {
     java = {
       home = '/opt/homebrew/Cellar/openjdk/24.0.2/libexec/openjdk.jdk/Contents/Home',
 
       configuration = {
         updateBuildConfiguration = 'interactive',
-        -- The runtimes' name parameter needs to match a specific Java execution environments.  See https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request and search "ExecutionEnvironment".
         runtimes = {
           {
             name = 'JavaSE-17',
@@ -67,7 +61,39 @@ local config = {
       },
     },
   },
+
+  init_options = {
+    bundles = bundles,
+  },
 }
+
+config['on_attach'] = function(client, bufnr)
+  jdtls.setup_dap { hotcodereplace = 'auto' }
+  require('jdtls.dap').setup_dap_main_class_configs()
+end
 
 -- This starts a new client & server, or attaches to an existing client & server based on the `root_dir`.
 jdtls.start_or_attach(config)
+
+local map = function(keys, func, desc, mode)
+  mode = mode or 'n'
+  vim.keymap.set(mode, keys, func, { desc = desc })
+end
+
+map('<leader>jc', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_class()
+  end
+end, 'Test [J]ava [C]lass')
+
+map('<leader>jm', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').test_nearest_method()
+  end
+end, 'Test [J]ava [M]ethod')
+
+map('<leader>ji', function()
+  if vim.bo.filetype == 'java' then
+    require('jdtls').organize_imports()
+  end
+end, 'Organize [J]ava [I]mports')

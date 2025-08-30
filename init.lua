@@ -565,7 +565,27 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'clangd',
+        'codespell',
+        'docker_compose_language_service',
+        'eslint_d',
+        'goimports',
+        'google-java-format',
+        'java-test',
+        'java-debug-adapter',
+        'gopls',
+        'lua_ls',
+        'prettierd',
+        'prismals',
+        'sql-formatter',
+        'staticcheck',
+        'stylua',
+        'terraform',
+        'terraformls',
+        'tflint',
+        'tfsec',
+        'ts_ls',
+        'xmlformatter',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -633,6 +653,7 @@ require('lazy').setup({
         yaml = { 'prettierd' },
         html = { 'prettierd' },
         c = { 'clang-format' },
+        java = { 'google-java-format' },
         templ = {
           'templ',
           'injected',
@@ -716,7 +737,6 @@ require('lazy').setup({
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 500,
 
           window = {
             min_width = 10,
@@ -849,6 +869,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.dap',
 
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   { import = 'custom.plugins' },
