@@ -10,7 +10,17 @@ local bundles = {
   vim.fn.glob(home .. '/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'),
 }
 
-vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/.local/share/nvim/mason/share/java-test/*.jar', true), '\n'))
+local java_test_bundles = vim.split(vim.fn.glob(home .. '/.local/share/nvim/mason/share/java-test/*.jar', true), '\n')
+local excluded = {
+  'com.microsoft.java.test.runner-jar-with-dependencies.jar',
+  'jacocoagent.jar',
+}
+for _, java_test_jar in ipairs(java_test_bundles) do
+  local fname = vim.fn.fnamemodify(java_test_jar, ':t')
+  if not vim.tbl_contains(excluded, fname) then
+    table.insert(bundles, java_test_jar)
+  end
+end
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
