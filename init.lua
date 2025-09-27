@@ -352,7 +352,7 @@ require('lazy').setup({
     end,
   },
 
-  { 'mfussenegger/nvim-jdtls', ft = 'java' },
+  -- { 'mfussenegger/nvim-jdtls', ft = 'java' },
 
   -- LSP Plugins
   {
@@ -531,7 +531,7 @@ require('lazy').setup({
         terraformls = {},
         tflint = {},
         ts_ls = {},
-        jdtls = {},
+        -- jdtls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
         lua_ls = {
@@ -570,9 +570,6 @@ require('lazy').setup({
         'docker_compose_language_service',
         'eslint_d',
         'goimports',
-        'google-java-format',
-        'java-test',
-        'java-debug-adapter',
         'gopls',
         'lua_ls',
         'prettierd',
@@ -586,6 +583,7 @@ require('lazy').setup({
         'tfsec',
         'ts_ls',
         'xmlformatter',
+        'kotlin_lsp',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -653,7 +651,6 @@ require('lazy').setup({
         yaml = { 'prettierd' },
         html = { 'prettierd' },
         c = { 'clang-format' },
-        java = { 'google-java-format' },
         templ = {
           'templ',
           'injected',
@@ -840,7 +837,6 @@ require('lazy').setup({
         'make',
         'cpp',
         'terraform',
-        'java',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
