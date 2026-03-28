@@ -4,5 +4,6 @@ require('mason-tool-installer').setup {
     'goimports',
     'gopls',
     'kotlin-lsp',
+    'ktfmt',
   },
 }
