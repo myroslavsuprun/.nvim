@@ -71,4 +71,5 @@ vim.lsp.config('*', {
 vim.lsp.enable {
   'gopls',
   'gleam',
+  'kotlin_lsp',
 }

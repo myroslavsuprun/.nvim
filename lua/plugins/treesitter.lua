@@ -7,7 +7,7 @@ local parsers = {
   'bash', 'c', 'markdown', 'markdown_inline', 'query',
   'vim', 'vimdoc', 'diff', 'go', 'tsx', 'typescript',
   'json', 'sql', 'html', 'haskell', 'yaml',
-  'prisma', 'make', 'gleam',
+  'prisma', 'make', 'gleam', 'kotlin',
 }
 vim.api.nvim_create_autocmd('VimEnter', {
   group = vim.api.nvim_create_augroup('ts-ensure-installed', { clear = true }),
