@@ -37,8 +37,12 @@ vim.pack.add {
   -- Mason chain
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
+  -- Completion + Snippets
+  'https://github.com/Saghen/blink.cmp',
   -- LSP (needs mason + blink)
   'https://github.com/neovim/nvim-lspconfig',
+  -- Formatting
+  'https://github.com/stevearc/conform.nvim',
   -- Oil (needs web-devicons)
   'https://github.com/stevearc/oil.nvim',
 }
@@ -51,10 +55,12 @@ require 'plugins.mini'
 require 'plugins.todo-comments'
 require 'plugins.lazydev'
 require 'plugins.telescope'
+require 'plugins.blink-cmp'
 require 'plugins.lsp'
 require 'plugins.mason'
 require 'plugins.treesitter'
 require 'plugins.gitsigns'
 require 'plugins.indent_line'
 require 'plugins.lualine'
+require 'plugins.conform'
 require 'plugins.oil'

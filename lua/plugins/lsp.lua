@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
 
-    map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+    map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
     map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
     map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
     map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -64,6 +64,7 @@ vim.diagnostic.config {
 
 -- Global LSP config (applies to all servers)
 vim.lsp.config('*', {
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
   root_markers = { '.git' },
 })
 
