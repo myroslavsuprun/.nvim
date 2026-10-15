@@ -1,3 +1,5 @@
+require('vim.snippet')
+
 require('blink.cmp').setup {
   keymap = { preset = 'default' },
 

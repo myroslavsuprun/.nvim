@@ -26,7 +26,7 @@ vim.pack.add {
   'https://github.com/nvim-tree/nvim-web-devicons',
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/nvim-lualine/lualine.nvim',
-  'https://github.com/nvim-treesitter/nvim-treesitter',
+  'https://github.com/romus204/tree-sitter-manager.nvim',
   -- Telescope chain
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/nvim-telescope/telescope-fzf-native.nvim',
@@ -34,6 +34,8 @@ vim.pack.add {
   'https://github.com/nvim-telescope/telescope.nvim',
   -- todo-comments (needs plenary)
   'https://github.com/folke/todo-comments.nvim',
+  -- Harpoon (needs plenary)
+  { src = 'https://github.com/ThePrimeagen/harpoon', version = 'harpoon2' },
   -- Mason chain
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -53,6 +55,7 @@ require 'plugins.guess-indent'
 require 'plugins.fidget'
 require 'plugins.mini'
 require 'plugins.todo-comments'
+require 'plugins.harpoon'
 require 'plugins.lazydev'
 require 'plugins.telescope'
 require 'plugins.blink-cmp'

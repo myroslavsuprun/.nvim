@@ -1,5 +1,6 @@
 require('conform').setup {
   formatters_by_ft = {
+    go = { 'goimports' },
     kotlin = { 'ktfmt' },
   },
   formatters = {
