@@ -24,7 +24,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
     map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
-    if client then
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client:supports_method('textDocument/inlayHint', event.buf) then
       map('<leader>th', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
       end, '[T]oggle Inlay [H]ints')
@@ -69,8 +70,8 @@ vim.lsp.config('*', {
 })
 
 -- Enable all servers
+-- kotlin_lsp is started by kotlin.nvim (see plugins/kotlin.lua), not here.
 vim.lsp.enable {
   'gopls',
   'gleam',
-  'kotlin_lsp',
 }

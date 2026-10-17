@@ -47,6 +47,10 @@ vim.pack.add {
   'https://github.com/stevearc/conform.nvim',
   -- Oil (needs web-devicons)
   'https://github.com/stevearc/oil.nvim',
+  -- Trouble (used by kotlin.nvim for :KotlinSymbols)
+  'https://github.com/folke/trouble.nvim',
+  -- Kotlin (needs mason + oil + trouble)
+  'https://github.com/AlexandrosAlexiou/kotlin.nvim',
 }
 
 -- Plugin configs
@@ -67,3 +71,5 @@ require 'plugins.indent_line'
 require 'plugins.lualine'
 require 'plugins.conform'
 require 'plugins.oil'
+require 'plugins.trouble'
+require 'plugins.kotlin'
